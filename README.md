@@ -6,9 +6,9 @@ A data engineering portfolio project that transforms a messy Dubai real-estate d
 
 The project takes a raw UAE real-estate dataset and processes it through an ETL pipeline:
 
-**Raw CSV → Data Cleaning → Star Schema → PostgreSQL Database → SQL Analysis**
+**Raw CSV → Data Cleaning → Star Schema → PostgreSQL Database → SQL Analysis → Dashboard**
 
-The goal is to demonstrate practical skills in:
+The project demonstrates practical skills in:
 
 * Python & Pandas
 * Data Cleaning
@@ -17,6 +17,7 @@ The goal is to demonstrate practical skills in:
 * Data Modeling
 * PostgreSQL
 * Data Analysis
+* Streamlit
 
 ## 🛠️ Tech Stack
 
@@ -27,13 +28,15 @@ The goal is to demonstrate practical skills in:
 | PostgreSQL   | Data warehouse                   |
 | Supabase     | Hosted PostgreSQL database       |
 | SQL          | Data analysis                    |
+| Streamlit    | Interactive dashboard            |
+| Plotly       | Data visualization               |
 | Git & GitHub | Version control                  |
 
 ## 🔄 ETL Pipeline
 
 ### 1. Extract
 
-A publicly available Dubai real-estate CSV dataset is used as the raw data source.
+A publicly available UAE real-estate CSV dataset is used as the raw data source.
 
 ### 2. Transform
 
@@ -60,15 +63,15 @@ The cleaned data was transformed into a **star schema** and loaded into a hosted
 The database consists of one central fact table and three dimension tables:
 
 ```text
-                 dim_property
-                      |
-                      |
+                    dim_property
+                         |
+                         |
 dim_location ---- fact_property ---- dim_project
-                      |
-                      |
-              Property Measures
-        price | bedrooms | bathrooms
-              | area | handover
+                         |
+                         |
+                  Property Measures
+             price | bedrooms | bathrooms
+                  | area | handover
 ```
 
 ### Dimension Tables
@@ -119,11 +122,26 @@ SQL queries were created to analyze:
 * Furnished vs. unfurnished properties
 * Ready vs. off-plan properties
 
+## 📈 Interactive Dashboard
+
+The project includes an interactive Streamlit dashboard featuring:
+
+* Property type analysis
+* Average property prices
+* Furnishing breakdown
+* Completion status breakdown
+* Average price per square foot
+* Top locations
+* Interactive filters
+
+**Live Dashboard:**
+[Open Dashboard](https://dubai-real-estate-project-mxtp3dre9n3arppig6k6uy.streamlit.app/)
+
 ## 📁 Project Structure
 
 ```text
 dubai-real-estate-project/
-│
+
 ├── data/
 │   ├── raw/                  # Original dataset (not committed)
 │   ├── cleaned_housing.csv   # Cleaned dataset (not committed)
@@ -139,9 +157,11 @@ dubai-real-estate-project/
 ├── sql/
 │   └── analysis.sql
 │
-├── dashboard/                # Dashboard files
+├── dashboard/
+│   └── app.py
 │
 ├── .gitignore
+├── requirements.txt
 └── README.md
 ```
 
@@ -149,22 +169,23 @@ dubai-real-estate-project/
 
 The original dataset and generated CSV files are intentionally excluded from GitHub using `.gitignore`.
 
-This keeps the repository lightweight while allowing the complete ETL process to be reproduced locally.
+Database credentials are stored locally in environment variables and are not committed to GitHub.
 
-Database credentials and other secrets should never be committed to GitHub.
+For the deployed dashboard, database credentials are securely configured using Streamlit Secrets.
 
-## 🚀 How to Run
+## 🚀 How to Run Locally
 
 Clone the repository:
 
 ```bash
 git clone https://github.com/vaishnavibnsall/Dubai-Real-Estate-Project.git
+cd Dubai-Real-Estate-Project
 ```
 
-Install the required Python libraries:
+Install the required libraries:
 
 ```bash
-pip install pandas
+python -m pip install -r requirements.txt
 ```
 
 Place the original dataset in:
@@ -183,6 +204,12 @@ python src/create_star_schema.py
 
 The resulting star-schema CSV files can then be loaded into PostgreSQL/Supabase.
 
+To run the dashboard locally:
+
+```bash
+streamlit run dashboard/app.py
+```
+
 ## 📌 Project Status
 
 * [x] Dataset collected
@@ -192,8 +219,9 @@ The resulting star-schema CSV files can then be loaded into PostgreSQL/Supabase.
 * [x] PostgreSQL database created
 * [x] Data loaded into Supabase
 * [x] SQL analysis completed
-* [ ] Dashboard
-* [ ] Final project documentation
+* [x] Interactive dashboard
+* [x] Dashboard deployed
+* [x] Project documentation
 
 ## 👩‍💻 Author
 
