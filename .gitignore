@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Node.js / Vercel
+node_modules/
+.next/
+.vercel/
+
+# Generated data
+data/processed/*
+!data/processed/.gitkeep
+
+# Operating system
+.DS_Store
+Thumbs.db
+
+# Project datasets - keep local
+data/raw/
+data/cleaned_housing.csv
+data/star_schema/*.csv
